@@ -21,14 +21,17 @@ pipeline {
         stage('Cucumber-report') {
             steps {
             cucumber buildStatus: "UNSTABLE",
-            // publish html
+            // Archive the built artifacts
+                    archive includes: 'pkg/*.gem'
+
+                    // publish html
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
                         reportDir: 'coverage',
                         reportFiles: 'index.html',
-                        reportName: 'cucumber-report'
+                        reportName: 'RCov Report'
                       ]
             }
         }
