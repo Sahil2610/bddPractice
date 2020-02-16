@@ -21,9 +21,15 @@ pipeline {
         stage('Cucumber-report') {
             steps {
             cucumber buildStatus: "UNSTABLE",
-            fileIncludePattern: "**/cucumber.html",
-            htmlReportDirectory: 'target'
-                echo 'Deploying....'
+            // publish html
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: 'coverage',
+                        reportFiles: 'index.html',
+                        reportName: 'cucumber-report'
+                      ]
             }
         }
     }
