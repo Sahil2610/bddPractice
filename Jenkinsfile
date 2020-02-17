@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('Compile Stage') {
             steps {
-            sh 'mvn clean install'
+            bat 'mvn clean install'
                 echo 'Compiling..'
             }
         }
         stage('Test') {
             steps {
-            sh 'mvn test'
+            bat 'mvn test'
                 echo 'Running Test..'
             }
         }
