@@ -6,8 +6,6 @@ pipeline {
  //below parameters are entered in jenkins pipeline
     parameters {
     string(name: 'tags', defaultValue: '@e2e', description: 'Run tests based on tag name')
-    string(name: 'reportname', defaultValue: 'test report', description: 'Which tests report to alert on slack?')
-
       }
 
   stages {
