@@ -2,6 +2,7 @@ pipeline {
 
 
   environment {
+  solutionName="bdd-project"
 
    //below parameters are entered in jenkins pipeline
    parameters {
