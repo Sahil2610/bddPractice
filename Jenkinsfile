@@ -1,5 +1,5 @@
 pipeline {
-parameters{string(defaultValue: '', description: 'Tests to run based on tags', name: 'tags', trim: false)}
+parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run based on tags',  trim: false)}
 
   agent any
   tools {
