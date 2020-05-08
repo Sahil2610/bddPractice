@@ -1,29 +1,23 @@
 pipeline {
 
- environment {
-    //Project Configurations
-    solutionName="ruby-cucumber"
-    reportUrl = "http://localhost:8080/job/$env.JOB_NAME/$env.BUILD_NUMBER/cucumber-html-reports/overview-failures.html"
 
-
+  environment {
 
    //below parameters are entered in jenkins pipeline
    parameters {
 
-   string(name: 'tags', defaultValue: '', description: 'Run tests based on tag name.')
-
-
+   string(name: 'tags', defaultValue: '@e2e', description: 'Run tests based on tag name.')
    }
 
 
   }
-    agent any
 
-    tools {
+  agent any
+  tools {
             maven 'maven-3.6.3'
         }
 
-    stages {
+  stages {
         stage('Compile Stage') {
             steps {
             bat 'mvn clean install -DskipTests'
@@ -45,4 +39,37 @@ pipeline {
             }
         }
     }
+  post {
+  	     failure {
+
+  	      echo "Test failed"
+                      cucumber buildStatus: 'FAIL',
+                                   failedFeaturesNumber: 1,
+                                   failedScenariosNumber: 1,
+                                   skippedStepsNumber: 1,
+                                   failedStepsNumber: 1,
+                                   fileIncludePattern: '**/*.json',
+                                   sortingMethod: 'ALPHABETICAL'
+
+          slackSend color: 'red', message: "${params.reportname} Tests failed. >> Click to view <$reportUrl|report>"
+
+  	     }
+
+  	      success {
+
+          echo "Test succeeded"
+                     cucumber buildStatus: 'SUCCESS',
+                                            failedFeaturesNumber: 0,
+                                            failedScenariosNumber: 0,
+                                            skippedStepsNumber: 0,
+                                            failedStepsNumber: 0,
+                                            fileIncludePattern: '**/*.json',
+                                            sortingMethod: 'ALPHABETICAL'
+
+          slackSend color: 'green', message: "${params.reportname} Tests passed. >> Click to view <$reportUrl|report>"
+
+          }
+
+  }
+
 }
