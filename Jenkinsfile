@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-            bat 'mvn test -Dcucumber.options="--tags "$TAGS'
+            bat 'mvn test -Dtags'
                 echo 'Running Test..'
             }
         }
