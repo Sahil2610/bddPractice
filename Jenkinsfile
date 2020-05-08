@@ -3,10 +3,6 @@ pipeline {
   tools {
             maven 'maven-3.6.3'
         }
- //below parameters are entered in jenkins pipeline
-    parameters {
-    string(name: 'tags', defaultValue: '@e2e', description: 'Run tests based on tag name')
-      }
 
   stages {
         stage('Compile Stage') {
@@ -17,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-            bat 'mvn test -Dcucumber.options="--tags @*"'
+            bat 'mvn test'
                 echo 'Running Test..'
             }
         }
