@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('Compile Stage') {
             steps {
-            bat 'mvn clean install'
+            bat 'mvn clean install -DskipTests'
                 echo 'Compiling..'
             }
         }
         stage('Test') {
             steps {
-            bat 'mvn test'
+            bat 'mvn test -Dcucumber.options="--tags "$TAGS'
                 echo 'Running Test..'
             }
         }
