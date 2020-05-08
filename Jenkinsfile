@@ -1,4 +1,22 @@
 pipeline {
+
+ environment {
+    //Project Configurations
+    solutionName="ruby-cucumber"
+    reportUrl = "http://localhost:8080/job/$env.JOB_NAME/$env.BUILD_NUMBER/cucumber-html-reports/overview-failures.html"
+
+
+
+   //below parameters are entered in jenkins pipeline
+   parameters {
+
+   string(name: 'tags', defaultValue: '', description: 'Run tests based on tag name.')
+
+
+   }
+
+
+  }
     agent any
 
     tools {
