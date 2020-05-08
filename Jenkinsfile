@@ -1,6 +1,6 @@
 pipeline {
 
-properties([parameters([string(defaultValue: '', description: 'Tests to run based on tags', name: 'tags', trim: false)])])
+options([parameters([string(defaultValue: '', description: 'Tests to run based on tags', name: 'tags', trim: false)])])
   agent any
   tools {
             maven 'maven-3.6.3'
