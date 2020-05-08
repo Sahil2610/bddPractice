@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-            bat 'mvn test -Dtags'
+            bat 'mvn test'
                 echo 'Running Test..'
             }
         }
