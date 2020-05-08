@@ -1,6 +1,6 @@
 Feature: Automated End to End Tests
   Description: The purpose of this feature is to test End to End integration
-
+  @e2e
   Scenario: User can navigate to rediffmail homepage
     Given user is on rediff homepage
     When user enters username and password and clicks submit button
