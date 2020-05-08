@@ -5,7 +5,10 @@ pipeline {
         }
  //below parameters are entered in jenkins pipeline
     parameters {
-    string(name: 'tags', defaultValue: '@e2e', description: 'Run tests based on tag name')  }
+    string(name: 'tags', defaultValue: '@e2e', description: 'Run tests based on tag name')
+    string(name: 'reportname', defaultValue: 'test report', description: 'Which tests report to alert on slack?')
+
+      }
 
   stages {
         stage('Compile Stage') {
@@ -41,7 +44,7 @@ pipeline {
                                    fileIncludePattern: '**/*.json',
                                    sortingMethod: 'ALPHABETICAL'
 
-          slackSend color: 'red', message: "${params.reportname} Tests failed. >> Click to view <$reportUrl|report>"
+          slackSend color: 'red', message: "${params.reportname} Tests failed."
 
   	     }
 
@@ -56,7 +59,7 @@ pipeline {
                                             fileIncludePattern: '**/*.json',
                                             sortingMethod: 'ALPHABETICAL'
 
-          slackSend color: 'green', message: "${params.reportname} Tests passed. >> Click to view <$reportUrl|report>"
+          slackSend color: 'green', message: "${params.reportname} Tests passed."
 
           }
 
