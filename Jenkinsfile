@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-            bat 'mvn test'
+            bat 'mvn test -Dcucumber.options="--tags @*"'
                 echo 'Running Test..'
             }
         }
@@ -32,37 +32,4 @@ pipeline {
             }
         }
     }
-  post {
-  	     failure {
-
-  	      echo "Test failed"
-                      cucumber buildStatus: 'FAIL',
-                                   failedFeaturesNumber: 1,
-                                   failedScenariosNumber: 1,
-                                   skippedStepsNumber: 1,
-                                   failedStepsNumber: 1,
-                                   fileIncludePattern: '**/*.json',
-                                   sortingMethod: 'ALPHABETICAL'
-
-          slackSend color: 'red', message: "${params.reportname} Tests failed."
-
-  	     }
-
-  	      success {
-
-          echo "Test succeeded"
-                     cucumber buildStatus: 'SUCCESS',
-                                            failedFeaturesNumber: 0,
-                                            failedScenariosNumber: 0,
-                                            skippedStepsNumber: 0,
-                                            failedStepsNumber: 0,
-                                            fileIncludePattern: '**/*.json',
-                                            sortingMethod: 'ALPHABETICAL'
-
-          slackSend color: 'green', message: "${params.reportname} Tests passed."
-
-          }
-
-  }
-
 }
