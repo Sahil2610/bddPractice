@@ -15,7 +15,7 @@ parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run bas
         }
         stage('Test') {
             steps {
-            bat 'mvn test -D tags="$TAGS"'
+            bat 'mvn test -D tags=params.tags'
                 echo 'Running Test..'
             }
         }
