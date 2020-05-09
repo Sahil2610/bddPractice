@@ -15,7 +15,7 @@ parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run bas
         }
         stage('Test') {
             steps {
-            bat 'mvn test -Dcucumber.options="--tags @Sahil"'
+            bat 'mvn test -Dcucumber.options="--tags @sahil"'
                 echo 'Running Test..'
             }
         }
