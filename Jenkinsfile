@@ -1,4 +1,5 @@
 pipeline {
+
 parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run based on tags',  trim: false)}
 
   agent any
@@ -16,7 +17,7 @@ parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run bas
         stage('Test') {
             steps {
             echo "Hello ${params.tags}"
-            bat 'mvn test -D tags ${params.tags}'
+            bat 'mvn test -D tags=params.tags'
                 echo 'Running Test..'
             }
         }
