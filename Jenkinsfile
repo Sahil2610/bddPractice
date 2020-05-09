@@ -1,5 +1,5 @@
 pipeline {
-//parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run based on tags',  trim: false)}
+parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run based on tags',  trim: false)}
 
   agent any
   tools {
@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-            bat 'mvn test -Dcucumber.options="--tags $params.tags"'
+            bat 'mvn test -Dcucumber.options=$params.tags'
                 echo 'Running Test..'
             }
         }
