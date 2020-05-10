@@ -1,11 +1,9 @@
 pipeline {
-
-parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run based on tags',  trim: false)}
-
   agent any
   tools {
             maven 'maven-3.6.3'
         }
+  parameters {string(name: 'tags', defaultValue: '', description: 'Tests to run based on tags',  trim: false)}
 
   stages {
         stage('Compile Stage') {
@@ -17,7 +15,7 @@ parameters{string(name: 'tags', defaultValue: '', description: 'Tests to run bas
         stage('Test') {
             steps {
             echo "Hello ${params.tags}"
-            bat 'mvn test -D tags =${params.tags}'
+            bat 'mvn test -Dcucumber.options="--tags ${params.tags}"'
                 echo 'Running Test..'
             }
         }
