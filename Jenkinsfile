@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             steps {
             echo "Hello ${params.tags}"
-            paramAValue = "${params.tags}"
+            def paramAValue = "${params.tags}"
             bat 'mvn test -Dcucumber.options = "--tags paramAValue"'
                 echo 'Running Test..'
             }
