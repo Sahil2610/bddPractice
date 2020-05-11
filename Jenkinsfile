@@ -5,7 +5,6 @@ pipeline {
         }
   parameters {
   string(name: 'tags', defaultValue: '', description: 'Tests to run based on tags',  trim: false)
-  string(name: 'goal', defaultValue: '', description: 'Specify maven goal',  trim: false)
   }
 
   stages {
@@ -19,9 +18,7 @@ pipeline {
             steps {
             echo "Hello ${params.tags}"
             //def paramAValue = "${params.tags}"
-            //bat 'mvn test -Dcucumber.options = "--tags paramAValue"'
-
-            bat '${params.goal}'
+            bat 'mvn test -Dcucumber.options = "--tags ${{params.tags}}"'
                 echo 'Running Test..'
             }
         }
