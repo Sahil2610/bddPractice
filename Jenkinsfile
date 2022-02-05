@@ -31,7 +31,7 @@ pipeline {
    stage('Run Test') {
             steps {
             withMaven(maven: 'maven_3_6_3'){
-              sh 'mvn test -DTAGNAME=${TAGNAME}'
+              sh 'mvn test -DTAGNAME=${params.TAGNAME}'
             }
                 echo 'Running Test..'
             }
