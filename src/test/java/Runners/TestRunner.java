@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/resources/e2eTests",glue={"stepDefinitions"},
+        features = "src/test/java/resources",glue={"stepDefinitions"},
         plugin = { "pretty", "html:target/cucumber-reports","json:target/cucumber.json" },
         tags={"@e2e","@sahil"},
         monochrome = true
