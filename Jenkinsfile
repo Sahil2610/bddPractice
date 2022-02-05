@@ -3,16 +3,16 @@ pipeline {
 
   environment {
     //Project Configurations
-    solutionName="ruby-cucumber"
+    solutionName="bdd-automation"
     reportUrl = "http://localhost:8080/job/$env.JOB_NAME/$env.BUILD_NUMBER/cucumber-html-reports/overview-failures.html"
 
 
 
    //below parameters are entered in jenkins pipeline
-   // parameters {
+   parameters {
 
    //         string(name: 'test', defaultValue: 'api_tests', description: 'Which tests to run?')
-   //         string(name: 'feature', defaultValue: 'Cart', description: 'Which feature to run?')
+            string(name: 'TAGNAME', defaultValue: '', description: 'Which Test to run?')
    //         string(name: 'browser', defaultValue: 'seleniumgrid', description: 'Which browser to use?')
    //         string(name: 'platform', defaultValue: 'mobile', description: 'Which platform to run tests?')
    //         string(name: 'environment', defaultValue: 'test', description: 'Which environment to run tests?')
@@ -31,7 +31,7 @@ pipeline {
    stage('Run Test') {
             steps {
             withMaven(maven: 'maven_3_6_3'){
-            sh 'mvn test'
+              sh 'mvn test -DTAGNAME=${TAGNAME}'
             }
                 echo 'Running Test..'
             }
