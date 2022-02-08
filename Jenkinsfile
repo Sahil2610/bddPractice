@@ -27,12 +27,10 @@ pipeline {
   agent any
 
   stages {
-   
-   stage('Run Test') {
+    stage('Test') {
             steps {
-            withMaven(maven: 'maven_3_6_3'){
-              sh 'mvn clean install "-Dcucumber.options= --tags @e2e"'
-              //sh 'mvn clean install "-Dcucumber.options= --tags ${params.TAGNAME}'"
+            withMaven(maven: 'maven_3_8_2'){
+            sh 'mvn test "-Dcucumber.options= --tags @e2e"'
             }
                 echo 'Running Test..'
             }
