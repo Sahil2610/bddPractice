@@ -31,7 +31,7 @@ pipeline {
    stage('Run Test') {
             steps {
             withMaven(maven: 'maven_3_6_3'){
-              echo "${params.TAGNAME}"
+              sh 'mvn clean install "-Dcucumber.options= --tags @e2e"'
               //sh 'mvn clean install "-Dcucumber.options= --tags ${params.TAGNAME}'"
             }
                 echo 'Running Test..'
